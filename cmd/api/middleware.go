@@ -18,11 +18,18 @@ func PrometheusMiddleware() gin.HandlerFunc {
 
 		c.Next()
 
-		status := strconv.Itoa(c.Writer.Status())
+		statusCode := c.Writer.Status()
+        status := strconv.Itoa(statusCode)
 
 		appmetrics.WorkRequests.
 			WithLabelValues(status).
 			Inc()
+
+		if statusCode >= 400 {
+            appmetrics.FailRequest.
+                WithLabelValues(status).
+                Inc()
+        }
 
 		appmetrics.WorkDuration.
 			Observe(time.Since(start).Seconds())
