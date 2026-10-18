@@ -24,7 +24,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ../../server.dockerfile
+          context: .
+          file: ./server.dockerfile
           push: true
           tags: saker233/go-observability:latest
 
