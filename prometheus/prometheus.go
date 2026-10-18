@@ -19,6 +19,12 @@ var (
 		[]string{"status"},
 	)
 
+	FailRequest = prom.NewCounterVec(prom.CounterOpts{
+		Name: "api_http_request_error_total",
+		Help: "Total number of errors returned by the API",
+	}, []string{"status"},
+	)
+
 	WorkDuration = prom.NewHistogram(
 		prom.HistogramOpts{
 			Name:    "work_duration_seconds",
@@ -38,6 +44,7 @@ var (
 func init() {
 	Registry.MustRegister(
 		WorkRequests,
+		FailRequest,
 		WorkDuration,
 		WorkInFlight,
 		collectors.NewGoCollector(),
