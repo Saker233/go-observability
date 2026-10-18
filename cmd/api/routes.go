@@ -7,5 +7,7 @@ import (
 func routes() *gin.Engine {
 	router := gin.Default()
 
+	router.GET("/health", getHealth)
+
 	return router
 }
