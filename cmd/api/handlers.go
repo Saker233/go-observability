@@ -18,7 +18,7 @@ func doWork(c *gin.Context) {
 	time.Sleep(500 * time.Millisecond)
 
 	c.JSON(200, gin.H{
-		"status": "work done",
+		"status": "work done!",
 	})
 }
 
